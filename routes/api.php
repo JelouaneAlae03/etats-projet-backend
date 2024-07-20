@@ -29,7 +29,7 @@ Route::group(['prefix' => 'etats'], function () {
     Route::get('/reservations',EtatReservation::class);
     Route::get('/encaissements',EtatEncaissement::class);
     Route::Post('/getreservationsdata',PostReservation::class);
-
+    Route::Post('/postencaissementsdata',PostReservation::class);
 });
 
 

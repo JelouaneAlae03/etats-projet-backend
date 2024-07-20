@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class PostReservation extends Controller
+class PostEncaissement extends Controller
 {
     /**
      * Handle the incoming request.
