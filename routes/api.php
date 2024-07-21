@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostEncaissement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EtatController;
@@ -29,7 +30,7 @@ Route::group(['prefix' => 'etats'], function () {
     Route::get('/reservations',EtatReservation::class);
     Route::get('/encaissements',EtatEncaissement::class);
     Route::Post('/getreservationsdata',PostReservation::class);
-    Route::Post('/postencaissementsdata',PostReservation::class);
+    Route::Post('/postencaissementsdata',PostEncaissement::class);
 });
 
 

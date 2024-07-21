@@ -22,8 +22,12 @@ class PostReservation extends Controller
         $fEt = $filters['fEt'] ?? null;
         $fSelectEntre = $filters['fSelectEntre'] ?? null;
 
+        $sEntre = $filters['sEntre'] ?? null;
+        $sEt = $filters['sEt'] ?? null;
+        $sSelectEntre = $filters['sSelectEntre'] ?? null;
+
         foreach ($filters as $key => $value) {
-            if (in_array($key, ['fEntre', 'fEt', 'fSelectEntre'])) {
+            if (in_array($key, ['fEntre', 'fEt', 'fSelectEntre', 'sEntre', 'sEt', 'sSelectEntre'])) {
                 continue;
             }
             if (!is_null($value)) {
@@ -33,6 +37,9 @@ class PostReservation extends Controller
         
         if (!is_null($fEntre) && !is_null($fEt) && !is_null($fSelectEntre)) {
             $query->whereBetween($fSelectEntre, [$fEntre, $fEt]);
+        }
+        if (!is_null($sEntre) && !is_null($sEt) && !is_null($sSelectEntre)) {
+            $query->whereBetween(DB::raw('CAST(' . $sSelectEntre . ' AS DATE)'), [$sEntre, $sEt]);
         }
 
         $results = $query->get();
