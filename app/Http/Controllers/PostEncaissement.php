@@ -18,19 +18,14 @@ class PostEncaissement extends Controller
         $query = DB::table('V_Encaissement')
             ->select('Bien', 'client', 'Prix_Vente' , 'montant', 'Prix_Stock' ,'Num_Recu','Numero', 'Nature','Lib_Banque','Lib_Agence','Lib_Ville','Date_Systeme'); 
         
-        $fEntre = $filters['fEntre'] ?? null;
-        $fEt = $filters['fEt'] ?? null;
-        $fSelectEntre = $filters['fSelectEntre'] ?? null;
+        $filterKeys = ['fEntre', 'fEt', 'fSelectEntre', 'sEntre', 'sEt', 'sSelectEntre'];
 
-        $sEntre = $filters['sEntre'] ?? null;
-        $sEt = $filters['sEt'] ?? null;
-        $sSelectEntre = $filters['sSelectEntre'] ?? null;
-
+        foreach ($filterKeys as $key) {
+            $$key = $filters[$key] ?? null;
+        }
+        
         foreach ($filters as $key => $value) {
-            if (in_array($key, ['fEntre', 'fEt', 'fSelectEntre', 'sEntre', 'sEt', 'sSelectEntre'])) {
-                continue;
-            }
-            if (!is_null($value)) {
+            if (!in_array($key, $filterKeys) && !is_null($value)) {
                 $query->where($key, $value);
             }
         }

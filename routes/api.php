@@ -7,6 +7,8 @@ use App\Http\Controllers\EtatController;
 use App\Http\Controllers\EtatReservation;
 use App\Http\Controllers\EtatEncaissement;
 use App\Http\Controllers\PostReservation;
+use App\Http\Controllers\EtatStock;
+use App\Http\Controllers\PostStock;
 
 
 /*
@@ -29,8 +31,11 @@ Route::group(['prefix' => 'etats'], function () {
     Route::get('/',[EtatController::class,'index']);
     Route::get('/reservations',EtatReservation::class);
     Route::get('/encaissements',EtatEncaissement::class);
+    Route::get('/stock',EtatStock::class);
     Route::Post('/getreservationsdata',PostReservation::class);
     Route::Post('/postencaissementsdata',PostEncaissement::class);
+    Route::Post('/poststockdata',PostStock::class);
+
 });
 
 

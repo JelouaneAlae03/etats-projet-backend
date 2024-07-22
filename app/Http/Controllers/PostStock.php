@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
-class PostReservation extends Controller
+class PostStock extends Controller
 {
     /**
      * Handle the incoming request.
@@ -15,8 +14,8 @@ class PostReservation extends Controller
     {
         $filters = $request->input('conditions', []);
         log::info($filters);
-        $query = DB::table('V_Vente')
-            ->select('Projet','Tranche','GH','Immeuble','Bien', 'Nature', 'Etage' , 'Standing', 'client' ,'num_dossier','date_reservation', 'Date_concretisation','Date_Validation','Prix_Vente','total','Reliquat','Commercial'); 
+        $query = DB::table('V_Stock')
+            ->select('Projet','Tranche','GH','Immeuble','Bien', 'Nature', 'Etage' ,'etat', 'Standing','prix_vente'); 
         
         $filterKeys = ['fEntre', 'fEt', 'fSelectEntre', 'sEntre', 'sEt', 'sSelectEntre'];
         foreach ($filterKeys as $key) {
@@ -36,7 +35,7 @@ class PostReservation extends Controller
             $query->whereBetween($fSelectEntre, [$fEntre, $fEt]);
         }
         if (!is_null($sEntre) && !is_null($sEt) && !is_null($sSelectEntre)) {
-            $query->whereBetween(DB::raw('CAST(' . $sSelectEntre . ' AS DATE)'), [$sEntre, $sEt]);
+            $query->whereBetween($sSelectEntre, [$sEntre, $sEt]);
         }
 
         $results = $query->get();
