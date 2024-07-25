@@ -11,6 +11,8 @@ use App\Http\Controllers\EtatStock;
 use App\Http\Controllers\PostStock;
 use App\Http\Controllers\EtatConsignations;
 use App\Http\Controllers\PostConsignations;
+use App\Http\Controllers\AuthController;
+
 
 
 
@@ -45,5 +47,8 @@ Route::group(['prefix' => 'etats'], function () {
 
 
 });
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
+
 
 
