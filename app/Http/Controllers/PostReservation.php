@@ -16,7 +16,7 @@ class PostReservation extends Controller
         $filters = $request->input('conditions', []);
         log::info($filters);
         $query = DB::table('V_Vente')
-            ->select('Projet','Tranche','GH','Immeuble','Bien', 'Nature', 'Etage' , 'Standing', 'client' ,'num_dossier','date_reservation', 'Date_concretisation','Date_Validation','Prix_Vente','total','Reliquat','Commercial'); 
+            ->select('Projet','Immeuble','Bien', 'Nature', 'Etage' , 'Standing', 'client' ,'num_dossier','date_reservation', 'Date_concretisation','Date_Validation','Prix_Vente','total','Reliquat','Commercial'); 
         
         $filterKeys = ['fEntre', 'fEt', 'fSelectEntre', 'sEntre', 'sEt', 'sSelectEntre'];
         foreach ($filterKeys as $key) {

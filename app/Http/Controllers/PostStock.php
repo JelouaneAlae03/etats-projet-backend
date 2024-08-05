@@ -15,7 +15,7 @@ class PostStock extends Controller
         $filters = $request->input('conditions', []);
         log::info($filters);
         $query = DB::table('V_Stock')
-            ->select('Projet','Tranche','GH','Immeuble','Bien', 'Nature', 'Etage' ,'etat', 'Standing','prix_vente'); 
+            ->select('Projet','Immeuble','Tranche','GH','Immeuble','Bien', 'Nature', 'Etage' ,'etat', 'Standing','prix_vente'); 
         
         $filterKeys = ['fEntre', 'fEt', 'fSelectEntre', 'sEntre', 'sEt', 'sSelectEntre'];
         foreach ($filterKeys as $key) {

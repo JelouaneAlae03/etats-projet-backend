@@ -17,7 +17,7 @@ class PostConsignations extends Controller
         Log::info($filters);
         
         $query = DB::table('V_Consignation')
-            ->select('Projet', 'Tranche', 'GH', 'client', 'Immeuble', 'Bien', 'Nature', 'Etage', 'etat', 'Standing', 'prix_vente', 'Date_Consignation', 'total', 'Date_Prevue_Paiement', 'Montant_Regularise');
+            ->select('Projet', 'Immeuble' ,'Tranche', 'GH', 'client', 'Immeuble', 'Bien', 'Nature', 'Etage', 'etat', 'Standing', 'prix_vente', 'Date_Consignation', 'total', 'Date_Prevue_Paiement', 'Montant_Regularise');
         
         $filterKeys = ['fEntre', 'fEt', 'fSelectEntre', 'sSelectMontant'];
         foreach ($filterKeys as $key) {

@@ -16,7 +16,7 @@ class PostEncaissement extends Controller
         $filters = $request->input('conditions', []);
         log::info($filters);
         $query = DB::table('V_Encaissement')
-            ->select('Bien', 'client', 'Prix_Vente' , 'montant', 'Prix_Stock' ,'Num_Recu','Numero','date_encaissement', 'Nature','Lib_Banque','Lib_Agence','Lib_Ville','Date_Systeme'); 
+            ->select('Projet','Immeuble','Bien', 'client', 'Prix_Vente' , 'montant', 'Prix_Stock' ,'Num_Recu','Numero','date_encaissement', 'Nature','Lib_Banque','Lib_Agence','Lib_Ville','Date_Systeme'); 
         
         $filterKeys = ['fEntre', 'fEt', 'fSelectEntre', 'sEntre', 'sEt', 'sSelectEntre'];
 
