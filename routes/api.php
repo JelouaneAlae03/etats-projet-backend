@@ -1,21 +1,22 @@
 <?php
 
-use App\Http\Controllers\PostEncaissement;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EtatController;
-use App\Http\Controllers\EtatReservation;
-use App\Http\Controllers\EtatEncaissement;
-use App\Http\Controllers\PostReservation;
+use App\Http\Controllers\Droits;
 use App\Http\Controllers\EtatStock;
+use App\Http\Controllers\getDbInfo;
 use App\Http\Controllers\PostStock;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GetUsersList;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EtatController;
+use App\Http\Controllers\GetUserDetails;
+use App\Http\Controllers\EtatReservation;
+use App\Http\Controllers\PostReservation;
+use App\Http\Controllers\EtatEncaissement;
+use App\Http\Controllers\PostEncaissement;
+use App\Http\Controllers\ChangeUserDetails;
 use App\Http\Controllers\EtatConsignations;
 use App\Http\Controllers\PostConsignations;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\GetUsersList;
-use App\Http\Controllers\GetUserDetails;
-use App\Http\Controllers\ChangeUserDetails;
-use App\Http\Controllers\getDbInfo;
 
 
 
@@ -59,7 +60,13 @@ Route::group(['prefix' => 'users', 'middleware' => ['VerifyJwtToken']], function
 });
 Route::group(['prefix' => 'configuration', 'middleware' => ['VerifyJwtToken']], function () {
     Route::post('/database', getDbInfo::class);
+});
 
+Route::group(['prefix' => 'droits', 'middleware' => ['VerifyJwtToken']], function () {
+    Route::get('/', [Droits::class, 'index']);
+    Route::post('/add-droit', [Droits::class, 'store']);
+    Route::post('/update-droit', [Droits::class, 'update']);
+    Route::get('/info-formulaires', [Droits::class, 'getForm']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);

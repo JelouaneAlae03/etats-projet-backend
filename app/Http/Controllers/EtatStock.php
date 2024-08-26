@@ -16,4 +16,5 @@ class EtatStock extends Controller
         Nature , Standing , Tranche  FROM V_Stock');
        return response()->json($results);
     }
+
 }
