@@ -12,6 +12,11 @@ use App\Http\Controllers\PostStock;
 use App\Http\Controllers\EtatConsignations;
 use App\Http\Controllers\PostConsignations;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GetUsersList;
+use App\Http\Controllers\GetUserDetails;
+use App\Http\Controllers\ChangeUserDetails;
+use App\Http\Controllers\getDbInfo;
+
 
 
 
@@ -33,20 +38,30 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::group(['prefix' => 'etats'], function () {
-    Route::get('/',[EtatController::class,'index']);
-    Route::get('/reservations',EtatReservation::class);
-    Route::get('/encaissements',EtatEncaissement::class);
-    Route::get('/stock',EtatStock::class);
-    Route::get('/consignations',EtatConsignations::class);
+Route::group(['prefix' => 'etats', 'middleware' => ['VerifyJwtToken']], function () {
+    Route::get('/', [EtatController::class, 'index']);
+    Route::get('/reservations', EtatReservation::class);
+    Route::get('/encaissements', EtatEncaissement::class);
+    Route::get('/stock', EtatStock::class);
+    Route::get('/consignations', EtatConsignations::class);
 
-    Route::Post('/getreservationsdata',PostReservation::class);
-    Route::Post('/postencaissementsdata',PostEncaissement::class);
-    Route::Post('/poststockdata',PostStock::class);
-    Route::Post('/postConsignationsdata',PostConsignations::class);
+    Route::post('/getreservationsdata', PostReservation::class);
+    Route::post('/postencaissementsdata', PostEncaissement::class);
+    Route::post('/poststockdata', PostStock::class);
+    Route::post('/postConsignationsdata', PostConsignations::class);
+});
 
+Route::group(['prefix' => 'users', 'middleware' => ['VerifyJwtToken']], function () {
+    Route::post('/list', GetUsersList::class);
+    Route::post('/userdetails', GetUserDetails::class);
+    Route::put('/user/{id}', ChangeUserDetails::class);
 
 });
+Route::group(['prefix' => 'configuration', 'middleware' => ['VerifyJwtToken']], function () {
+    Route::post('/database', getDbInfo::class);
+
+});
+
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout']);
 

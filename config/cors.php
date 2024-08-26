@@ -17,18 +17,18 @@ return [
 
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['*'],
+    'allowed_methods' => ['*'],  // You can specify methods like ['GET', 'POST'] if needed
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => ['http://localhost:3000'],  // Replace with your frontend URL
 
     'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+    'allowed_headers' => ['*'],  // You can specify headers if needed
 
     'exposed_headers' => [],
 
     'max_age' => 0,
 
-    'supports_credentials' => false,
+    'supports_credentials' => true,  // Set to true to support credentials
 
 ];

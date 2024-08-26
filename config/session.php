@@ -196,6 +196,9 @@ return [
     |
     */
 
-    'same_site' => 'lax',
+    'cookie' => [
+        'same_site' => 'none',
+        'secure' => true, // Ensure this is true if you are using HTTPS
+    ],
 
 ];
