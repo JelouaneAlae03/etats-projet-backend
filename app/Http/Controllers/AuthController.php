@@ -28,13 +28,14 @@ class AuthController extends Controller
                     $token = JWTAuth::fromUser($user);
                     log::info($token);
     
-                    // $cookieUser = cookie('user', json_encode($user), 30); 
+                    $cookieUser = cookie('userID', json_encode($user->Cle), 60); 
                     $cookieToken = cookie('token', $token, 60);
                     
     
                     return response()->json([
                         'success' => true
-                    ])->withCookie(cookie('token', $token, 60, '/', null, true, true, false, 'None'));
+                    ])->withCookie(cookie('token', $token, 60, '/', null, true, true, false, 'None'))
+                    ->withCookie(cookie('userID', json_encode($user->Cle), 60, '/', null, true, true, false, 'None'));
     
                 } catch (JWTException $e) {
                     return response()->json([
@@ -64,13 +65,13 @@ class AuthController extends Controller
             JWTAuth::invalidate(JWTAuth::getToken());
     
             // Clear the cookies by setting them to null
-            // $cookieUser = cookie('user', null, -1, '/', null, false, true, false, 'None'); 
+            $cookieUser = cookie('userID', null, -1, '/', null, false, true, false, 'None'); 
             $cookieToken = cookie('token', null, -1, '/', null, false, true, false, 'None');
     
             return response()->json([
                 'success' => true,
                 'message' => 'Successfully logged out'
-            ])->withCookie($cookieToken);
+            ])->withCookie($cookieToken,$cookieUser);
             
         } catch (JWTException $e) {
             Log::error('Failed to logout: ' . $e->getMessage());

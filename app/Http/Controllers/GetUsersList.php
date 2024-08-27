@@ -13,7 +13,13 @@ class GetUsersList extends Controller
      */
     public function __invoke(Request $request)
     {
-        $results = DB::select('SELECT Cle , Nom , Description FROM Utilisateur');
-        return response()->json($results);
+        $userID = $request->cookie('userID');
+    
+        $results = DB::select('SELECT Cle, Nom, Description FROM Utilisateur');
+    
+        return response()->json([
+            'userID' => $userID,
+            'results' => $results
+        ]);
     }
 }
