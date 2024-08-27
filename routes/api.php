@@ -17,6 +17,9 @@ use App\Http\Controllers\PostEncaissement;
 use App\Http\Controllers\ChangeUserDetails;
 use App\Http\Controllers\EtatConsignations;
 use App\Http\Controllers\PostConsignations;
+use App\Http\Controllers\DeleteRight;
+use App\Http\Controllers\UpdateDbConfig;
+
 
 
 
@@ -60,6 +63,8 @@ Route::group(['prefix' => 'users', 'middleware' => ['VerifyJwtToken']], function
 });
 Route::group(['prefix' => 'configuration', 'middleware' => ['VerifyJwtToken']], function () {
     Route::post('/database', getDbInfo::class);
+    Route::post('/update-database', UpdateDbConfig::class);
+
 });
 
 Route::group(['prefix' => 'droits', 'middleware' => ['VerifyJwtToken']], function () {
@@ -67,6 +72,8 @@ Route::group(['prefix' => 'droits', 'middleware' => ['VerifyJwtToken']], functio
     Route::post('/add-droit', [Droits::class, 'store']);
     Route::post('/update-droit', [Droits::class, 'update']);
     Route::get('/info-formulaires', [Droits::class, 'getForm']);
+    Route::post('/delete', DeleteRight::class);
+
 });
 
 Route::post('/login', [AuthController::class, 'login']);
