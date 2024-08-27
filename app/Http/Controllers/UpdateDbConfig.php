@@ -27,6 +27,8 @@ class UpdateDbConfig extends Controller
         File::put($envFile, $envContent);
 
         Artisan::call('config:cache');
+        Artisan::call('config:clear');
+
 
         return response()->json(['message' => 'Database settings updated successfully']);
     

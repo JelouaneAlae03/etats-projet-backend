@@ -33,7 +33,8 @@ class AuthController extends Controller
                     
     
                     return response()->json([
-                        'success' => true
+                        'success' => true,
+                        'userName'   => $user->Nom 
                     ])->withCookie(cookie('token', $token, 60, '/', null, true, true, false, 'None'))
                     ->withCookie(cookie('userID', json_encode($user->Cle), 60, '/', null, true, true, false, 'None'));
     
