@@ -5,11 +5,13 @@ use App\Http\Controllers\Droits;
 use App\Http\Controllers\EtatStock;
 use App\Http\Controllers\getDbInfo;
 use App\Http\Controllers\PostStock;
+use App\Http\Controllers\DeleteRight;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GetUsersList;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\EtatController;
 use App\Http\Controllers\GetUserDetails;
+use App\Http\Controllers\UpdateDbConfig;
 use App\Http\Controllers\EtatReservation;
 use App\Http\Controllers\PostReservation;
 use App\Http\Controllers\EtatEncaissement;
@@ -17,8 +19,7 @@ use App\Http\Controllers\PostEncaissement;
 use App\Http\Controllers\ChangeUserDetails;
 use App\Http\Controllers\EtatConsignations;
 use App\Http\Controllers\PostConsignations;
-use App\Http\Controllers\DeleteRight;
-use App\Http\Controllers\UpdateDbConfig;
+use App\Http\Controllers\AfectDroitController;
 
 
 
@@ -74,6 +75,9 @@ Route::group(['prefix' => 'droits', 'middleware' => ['VerifyJwtToken']], functio
     Route::get('/info-formulaires', [Droits::class, 'getForm']);
     Route::post('/delete', DeleteRight::class);
 
+});
+Route::group(['prefix' => 'affect', 'middleware' => ['VerifyJwtToken']], function () {
+    Route::get('/', [AfectDroitController::class, 'getDroit']);
 });
 
 Route::post('/login', [AuthController::class, 'login']);
