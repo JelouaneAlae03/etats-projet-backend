@@ -20,6 +20,11 @@ use App\Http\Controllers\ChangeUserDetails;
 use App\Http\Controllers\EtatConsignations;
 use App\Http\Controllers\PostConsignations;
 use App\Http\Controllers\AfectDroitController;
+use App\Http\Controllers\GetAllRights;
+use App\Http\Controllers\AddRightsToUser;
+use App\Http\Controllers\RemoveUserRight;
+
+
 
 
 
@@ -77,7 +82,13 @@ Route::group(['prefix' => 'droits', 'middleware' => ['VerifyJwtToken']], functio
 
 });
 Route::group(['prefix' => 'affect', 'middleware' => ['VerifyJwtToken']], function () {
-    Route::get('/', [AfectDroitController::class, 'getDroit']);
+    Route::post('/', [AfectDroitController::class, 'getDroit']);
+    Route::post('/allrights', GetAllRights::class);
+    Route::post('/addrightstouser', AddRightsToUser::class);
+    Route::post('/remove-user-right', RemoveUserRight::class);
+
+
+
 });
 
 Route::post('/login', [AuthController::class, 'login']);

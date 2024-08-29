@@ -22,7 +22,7 @@ class VerifyJwtToken extends BaseMiddleware
     {
         // Check if the token exists in the cookies
         $token = $request->cookie('token');
-        log::info('token  '.$token);
+        // log::info('token  '.$token);
 
         
         if (!$token) {
@@ -35,14 +35,14 @@ class VerifyJwtToken extends BaseMiddleware
         try {
             // Parse the token to get the payload
             $payload = JWTAuth::parseToken()->getPayload();
-            Log::info('JWT Payload: ' . json_encode($payload->toArray()));
+            // Log::info('JWT Payload: ' . json_encode($payload->toArray()));
             $userId = $payload->get('sub');  // This should correspond to 'Cle'
 
             
             // Manually retrieve the user by the custom primary key
             $user = \App\Models\User::find($userId);
             
-            Log::info('Authenticated user: ' . json_encode($user));
+            // Log::info('Authenticated user: ' . json_encode($user));
             if (!$user) {
                 return response()->json(['success' => false, 'message' => 'Token is invalid'], 401);
             }
