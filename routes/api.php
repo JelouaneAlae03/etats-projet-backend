@@ -78,6 +78,7 @@ Route::group(['prefix' => 'droits', 'middleware' => ['VerifyJwtToken']], functio
     Route::post('/add-droit', [Droits::class, 'store']);
     Route::post('/update-droit', [Droits::class, 'update']);
     Route::get('/info-formulaires', [Droits::class, 'getForm']);
+    Route::get('/getalluserdroits', [Droits::class, 'getAllUserDroits']);
     Route::post('/delete', DeleteRight::class);
 
 });

@@ -15,6 +15,11 @@ class Droits extends Controller
         $results = DB::select('SELECT Code, Formulaire, Descriptif FROM Droits_Formulaires');
         return response()->json($results);
     }
+    public function getAllUserDroits(Request $request){
+        $numUtilisateur = $request->input('NumUtilisateur');
+        $results = DB::select('SELECT Code_Droit as Code FROM Droits_Speciaux_Utilisateur where Code_Utilisateur = ?', [$numUtilisateur]);
+        return response()->json($results);
+    }
     public function index()
     {
         $results = DB::select('SELECT * FROM Droits_Speciaux');
