@@ -31,7 +31,6 @@ class RemoveUserRight extends Controller
 
             return response()->json(['message' => 'Right removed successfully']);
         } catch (\Exception $e) {
-            // Return a JSON error response
             return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
         }
     }
